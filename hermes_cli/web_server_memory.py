@@ -106,7 +106,7 @@ def _run_setup_command(
 ) -> subprocess.CompletedProcess:
     return subprocess.run(
         command,
-        shell=shell,
+        shell=False,
         executable="/bin/bash" if shell else None,
         env=_memory_provider_setup_env(),
         capture_output=True,

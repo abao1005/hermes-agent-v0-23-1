@@ -203,7 +203,7 @@ def _captured_exec(rid, cmd, timeout: int, *, on_result, timeout_err: tuple, fai
     """Run ``cmd`` captured (see ``_capture_run_kwargs``) and hand the CompletedProcess to
     ``on_result``; TimeoutExpired → ``timeout_err`` (code, message), other errors → ``fail_code``."""
     try:
-        return on_result(subprocess.run(cmd, cwd=os.getcwd(), shell=shell, env=env, **_capture_run_kwargs(timeout)))
+        return on_result(subprocess.run(cmd, cwd=os.getcwd(), shell=False, env=env, **_capture_run_kwargs(timeout)))
     except subprocess.TimeoutExpired:
         return _err(rid, *timeout_err)
     except Exception as e:
@@ -481,7 +481,7 @@ def _dispatch_quick(rid, params, session, name, arg):
     if qc.get("type") == "exec":
         # Sanitized env: the TUI server process holds every API key in os.environ.
         env = _tools_mod("tools.environments.local").build_subprocess_env()
-        r = subprocess.run(qc.get("command", ""), shell=True, env=env, **_capture_run_kwargs(30))
+        r = subprocess.run(qc.get("command", ""), shell=False, env=env, **_capture_run_kwargs(30))
         output = _joined_output(r)[:4000]
         output = _tools_mod("agent.redact").redact_sensitive_text(output) if output else output
         if r.returncode != 0:

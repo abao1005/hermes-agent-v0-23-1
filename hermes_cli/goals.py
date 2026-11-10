@@ -401,7 +401,7 @@ def run_gate(gate: GoalGate, *, cwd: Optional[str] = None) -> tuple[bool, int, s
         # one unmappable byte (emoji/CJK on a non-UTF-8 Windows console) kills the reader thread and
         # the tail the agent needs arrives empty.
         proc = subprocess.run(
-            gate.command, shell=True, capture_output=True, text=True, encoding="utf-8", errors="replace",
+            gate.command, shell=False, capture_output=True, text=True, encoding="utf-8", errors="replace",
             timeout=max(1, int(gate.timeout_seconds)), cwd=cwd or None,
             check=False,
         )

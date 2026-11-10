@@ -1252,7 +1252,7 @@ class HermesCLI(CLIBacktrackMixin, CLIInitMixin, CLITuiRuntimeMixin, CLIProcessN
             from tools.environments.local import build_subprocess_env
             from hermes_cli._subprocess_compat import windows_hide_flags
             result = subprocess.run(
-                exec_cmd, shell=True, capture_output=True, text=True, encoding="utf-8", errors="replace",
+                exec_cmd, shell=False, capture_output=True, text=True, encoding="utf-8", errors="replace",
                 timeout=30, env=build_subprocess_env(),
                 creationflags=windows_hide_flags(),  # no console flash on Windows (#56747),
                 check=False,

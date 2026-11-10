@@ -115,7 +115,10 @@ def _tls_context(verify: bool, host: str) -> ssl.SSLContext:
         return ssl.create_default_context()
     if host not in ("127.0.0.1", "::1", "localhost"):
         logger.warning("TLS verification disabled for non-loopback host %s", host)
-    return ssl._create_unverified_context()
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    return ctx
 
 
 def _close_imap(imap: imaplib.IMAP4) -> None:

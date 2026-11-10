@@ -114,7 +114,7 @@ def run_bang_command(command: str, *, cwd: Optional[str] = None, timeout: int = 
     try:
         # shell=True is intentional (matches quick_commands): the human typed this, not the model.
         proc = subprocess.Popen(
-            command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
+            command, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
             encoding="utf-8", errors="replace", cwd=run_cwd, env=_bang_env(),
             creationflags=creationflags)
     except Exception as exc:

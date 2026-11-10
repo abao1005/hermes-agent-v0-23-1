@@ -64,7 +64,7 @@ def _run(command, cwd):
         raise RuntimeStoreError('cwd_unavailable')
     env = build_subprocess_env(strip_launch_profile=True)
     try:
-        result = subprocess.run(command, cwd=cwd, shell=True, env=env, capture_output=True,
+        result = subprocess.run(command, cwd=cwd, shell=False, env=env, capture_output=True,
                                 text=True, encoding='utf-8', errors='replace', timeout=TIMEOUT_SECONDS,
                                 stdin=subprocess.DEVNULL, creationflags=windows_hide_flags(), check=False)
     except subprocess.TimeoutExpired:
