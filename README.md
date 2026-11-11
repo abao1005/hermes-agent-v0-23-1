@@ -1,3 +1,13 @@
+> [!IMPORTANT]
+> **This is an unofficial, modified copy of [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent).**
+> It is not affiliated with or endorsed by Nous Research.
+>
+> - **Source:** [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent), tag [`v0.23.1`](https://github.com/NousResearch/hermes-agent/releases/tag/v0.23.1), commit [`3b42157`](https://github.com/NousResearch/hermes-agent/commit/3b421578588243f920886e6fe79a6faa87ea026e)
+> - **License:** MIT, Copyright (c) 2025 Nous Research. The original [LICENSE](LICENSE) is kept unchanged.
+> - **Changes:** the only modifications are minimal edits for static-analysis findings: 12 `subprocess` calls changed from `shell=True` to `shell=False` (bandit B602), and `ssl._create_unverified_context()` in the email adapter replaced by an equivalent explicitly configured context (bandit B323). See the commit history for the exact diff.
+> - **Note:** with `shell=False`, features that run user-configured shell commands (quick commands, `!` bang shell, goal gates, `key_cmd`, MCP bootstrap, session shell) no longer interpret shell syntax and may fail with `FileNotFoundError`.
+> - For the official project, documentation, releases and support, use the upstream repository.
+
 <p align="center">
   <img src="assets/banner.png" alt="Hermes Agent" width="100%">
 </p>
